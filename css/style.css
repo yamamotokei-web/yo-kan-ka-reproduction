@@ -1,0 +1,285 @@
+:root { color-scheme: light; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  min-height: 100vh;
+  background: #ececea;
+  font-family: "Zen Old Mincho", Georgia, serif;
+  overflow-x: hidden;
+}
+
+/* ===== Lenis（スムーススクロール）必須CSS ===== */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
+.lenis.lenis-smooth iframe { pointer-events: none; }
+
+/* ===== 「再現版」ラベル（左上に固定） ===== */
+.repro-badge {
+  position: fixed; top: 14px; left: 14px; z-index: 100;
+  padding: 4px 10px; border: 1px solid rgba(0,0,0,.3); border-radius: 50px;
+  font-family: "Zen Old Mincho", Georgia, serif; font-size: 11px;
+  letter-spacing: .14em; color: #000; background: rgba(255,255,255,.5);
+  backdrop-filter: blur(2px); pointer-events: none; user-select: none;
+}
+
+/* ===== KV はファーストビュー（100vh）。下にスクロールで features が出る ===== */
+.top-kv { position: relative; width: 100%; height: 100vh; overflow: hidden; z-index: 1; pointer-events: none; }
+.top-kv__bg { position: absolute; inset: 0; background: #ececea; }
+.top-kv__stage { position: absolute; left: 52%; top: 49%; }
+
+/* ===== 各カード ===== */
+.top-kv__item {
+  position: absolute; left: 0; top: 0; width: 420px;
+  translate: -50% -50%;
+  will-change: translate, rotate, filter, opacity;
+  pointer-events: none;
+}
+.top-kv__item img {
+  display: block; width: 100%; aspect-ratio: 42 / 20;
+  object-fit: cover;
+  /* JPG に焼き込まれた白背景を背景色になじませて長方形のフチを消す。
+     乗算合成：白×背景＝背景のまま → 白フチが見えなくなる（羊羹や影は残る） */
+  mix-blend-mode: multiply;
+}
+@media (max-width: 767px) {
+  .top-kv__item { width: 220px; }
+  .top-kv__stage { left: 55%; top: 49%; transform: scale(1.1); }
+}
+
+/* 実サイトの kv-rattle は全フレーム rotate:0deg（実質無効）。ごく僅かに揺らしている */
+@keyframes kv-rattle {
+  0%{rotate:0deg} 20%{rotate:0.4deg} 40%{rotate:-0.3deg}
+  60%{rotate:0.2deg} 80%{rotate:-0.1deg} 100%{rotate:0deg}
+}
+
+/* ===== ヒーローのコピー（見出し・ロゴ） ===== */
+.top-hero__copy {
+  position: absolute; top: 7vh; left: 50%; transform: translateX(-50%);
+  z-index: 10; text-align: center; pointer-events: none; width: max-content;
+}
+.top-hero__heading {
+  font-size: clamp(18px, 1.9vw, 28px); font-weight: 400;
+  letter-spacing: .12em; line-height: 1.65; color: #000; margin: 0;
+}
+.top-hero__heading-char {
+  display: inline-block; backface-visibility: hidden;
+  transition: opacity .5s ease, filter .5s ease;  /* 1文字ずつのフェード／ぼかし解除 */
+}
+.top-hero__wordmark {
+  margin: 16px 0 0; transition: opacity 1.45s ease;
+}
+.top-hero__wordmark img { display: block; width: clamp(240px, 24vw, 360px); height: auto; margin: 0 auto; }
+.top-hero__sub {
+  margin: 10px 0 0; font-family: "Marcellus", Georgia, serif;
+  font-size: 13px; letter-spacing: .18em; color: #000; opacity: .55;
+  transition: opacity .6s ease;
+}
+@media (max-width: 767px) {
+  .top-hero__copy { top: 5vh; }
+  .top-hero__wordmark img { width: clamp(200px, 60vw, 260px); }
+}
+
+/* ===== イントロ中（top-intro-pending）の初期状態：各要素を隠す ===== */
+html.top-intro-pending, html.top-intro-pending body { overflow: hidden; height: 100%; }
+html.top-intro-pending .top-hero__heading-char:not(.top-hero__heading-char--mark) {
+  opacity: 0; filter: blur(12px);
+}
+html.top-intro-pending .top-hero__heading-char--mark { opacity: 0; }
+html.top-intro-pending .top-hero__wordmark,
+html.top-intro-pending .top-hero__sub,
+html.top-intro-pending .top-kv__info { opacity: 0; }
+/* info はイントロ明けにふわっと出す */
+.top-kv__info { transition: opacity .8s ease; }
+
+/* ===================================================================
+   info ボックス（下部）— 本家の構造をそのまま再現
+   =================================================================== */
+.top-kv__info {
+  position: absolute;
+  display: flex; flex-direction: column; align-items: center; gap: 7px;
+  width: 320px; bottom: 4vw; left: 50%; right: auto; transform: translateX(-50%);
+  z-index: 10;
+}
+@media (max-width: 767px) {
+  .top-kv__info {
+    width: max-content; max-width: 90vw;
+    left: 50%; right: auto; bottom: 71px;
+    transform: translate(-50%, 0);
+  }
+  .top-kv__info-box { height: 35px; font-size: 16px; }
+  .top-kv__info-connector { font-size: 17px; }
+  .top-kv__info-suffix { font-size: 18px; }
+}
+
+/* --- season（数字ダイヤル + 進行バー） --- */
+.top-kv__info-season {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 13px; letter-spacing: .06em; color: #000; opacity: .4; min-height: 1em;
+}
+.top-kv__info-season-dial {
+  --kv-dial-slot: 1.2em;
+  flex: 0 0 auto; position: relative; width: .75em; height: var(--kv-dial-slot);
+  overflow: hidden; line-height: 1; text-align: center;
+}
+.top-kv__info-season-dial-track {
+  display: flex; flex-direction: column; align-items: center; will-change: transform;
+  transition: transform .55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.top-kv__info-season-dial-track.is-instant { transition: none; }
+.top-kv__info-season-dial-digit {
+  flex: 0 0 var(--kv-dial-slot); height: var(--kv-dial-slot);
+  display: flex; align-items: center; justify-content: center;
+}
+.top-kv__info-season-track {
+  flex: 0 0 auto; width: 64px; height: 2px; border-radius: 1px;
+  background: rgba(0,0,0,.12); overflow: hidden; align-self: center;
+}
+.top-kv__info-season-fill {
+  display: block; height: 100%; width: 100%;
+  transform-origin: left center; transform: scaleX(0);
+  background: currentColor; opacity: .85;
+  transition: transform .55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.top-kv__info-season-fill.is-running {
+  transition: none;
+  animation: top-kv-season-progress linear forwards;
+  animation-duration: var(--kv-season-ms, 4000ms);
+}
+@keyframes top-kv-season-progress { from{transform:scaleX(0)} to{transform:scaleX(1)} }
+
+/* --- product（枠 + 接続詞） --- */
+.top-kv__info-product { display: flex; flex-direction: column; gap: 8px; }
+.top-kv__info-row { display: flex; align-items: center; gap: 16px; min-width: 0; }
+.top-kv__info-box {
+  display: inline-flex; align-items: center; justify-content: flex-start;
+  /* 枠幅もビューポートに追従（最大 240px、画面が狭ければ縮む） */
+  width: clamp(150px, 62vw, 240px);
+  height: 42px; padding: 0 18px 0 7px;
+  border: 1px solid #d9d9d9; background: transparent;
+  font-size: 21px; letter-spacing: .13em; color: #000;
+  white-space: nowrap; overflow: hidden; box-sizing: border-box;
+}
+.top-kv__info-box-text {
+  display: block; width: 100%; text-align: left; transform-origin: left center;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.top-kv__info-connector { display: inline-block; font-size: 23px; letter-spacing: .13em; color: #000; }
+.top-kv__info-connector.is-bounce { animation: top-kv-info-bounce .42s cubic-bezier(0.22, 1, 0.36, 1); }
+
+/* --- suffix（ヨウカンカ） --- */
+.top-kv__info-suffix {
+  display: block; width: 100%; margin: 0; padding: 0 4px 0 0;
+  font-size: 23px; letter-spacing: .13em; color: #000;
+  text-align: right; white-space: nowrap; min-height: 1em; box-sizing: border-box;
+}
+.top-kv__info-suffix-char { display: inline-block; vertical-align: bottom; transform: translateZ(0); }
+.top-kv__info-suffix-char.is-bounce-fast {
+  animation: top-kv-info-bounce-suffix .4s cubic-bezier(0.34, 1.15, 0.64, 1);
+  backface-visibility: hidden; will-change: transform;
+}
+
+/* バー満タン → 次へ送る瞬間、枠内テキストをフェードアウト（サフィックスは残す） */
+.top-kv__info.is-fading .top-kv__info-box-text { opacity: 0; transition: opacity .2s ease; }
+.top-kv__info.is-fading .top-kv__info-suffix,
+.top-kv__info.is-fading .top-kv__info-suffix-char { opacity: 1; }
+
+@keyframes top-kv-info-bounce {
+  0%{transform:translateY(0)} 35%{transform:translateY(-4px)}
+  65%{transform:translateY(1px)} 100%{transform:translateY(0)}
+}
+@keyframes top-kv-info-bounce-suffix {
+  0%{transform:translate3d(0,0,0)} 28%{transform:translate3d(0,-4px,0)}
+  52%{transform:translate3d(0,1px,0)} 100%{transform:translate3d(0,0,0)}
+}
+
+/* ===================================================================
+   Three Features セクション（KV の下）
+   =================================================================== */
+.top-features {
+  position: relative; background: #ececea;
+  padding: 140px 0 200px; overflow: visible;
+}
+.top-features__content { width: 80%; margin: 0 auto; box-sizing: border-box; }
+.top-features__label { font-size: 18px; letter-spacing: .13em; color: #000; margin: 0 0 16px; }
+
+.top-features__heading {
+  font-family: "Marcellus", Georgia, serif;
+  font-size: clamp(48px, 6.4vw, 92px); font-weight: 400;
+  line-height: 1.05; letter-spacing: .01em; color: #000; margin: 0 0 48px;
+}
+/* 文字マスク出現：char-inner を下から押し上げる */
+.top-features__heading .char-mask { display: inline-block; overflow: hidden; vertical-align: baseline; }
+.top-features__heading .char-inner {
+  display: inline-block; transform: translateY(110%); opacity: 0;
+  transition: transform .6s cubic-bezier(0.22, 1, 0.36, 1), opacity .5s ease;
+  will-change: transform, opacity;
+}
+.top-features__heading.is-revealed .char-inner { transform: translateY(0); opacity: 1; }
+
+.top-features__rule { border: none; border-top: 1px solid rgba(0,0,0,.12); margin: 0; }
+.top-features__list { display: flex; flex-direction: column; }
+.top-features__item {
+  display: grid; grid-template-columns: 56px minmax(200px, 320px) 1fr;
+  align-items: start; border-top: 1px solid rgba(0,0,0,.12);
+  padding: 80px 0; cursor: default;
+}
+.top-features__item:first-child { border-top: none; }
+.top-features__num {
+  grid-column: 1; grid-row: 1; position: relative; z-index: 2;
+  font-family: "Inter", system-ui, sans-serif; font-weight: 500;
+  font-size: 14px; line-height: 1.6; color: #000; margin: 4px 0 0; white-space: nowrap;
+}
+.top-features__title {
+  grid-column: 2; grid-row: 1; position: relative; z-index: 2;
+  font-size: clamp(18px, 1.9vw, 27px); font-weight: 400;
+  line-height: 1.45; letter-spacing: .05em; color: #000; margin: 0;
+}
+.top-features__desc {
+  grid-column: 1 / -1; grid-row: 1; position: relative; z-index: 2;
+  font-size: 15px; line-height: 2; letter-spacing: .07em; color: #000;
+  margin: 0 0 0 40vw; width: 400px; max-width: 400px; text-align: left; pointer-events: none;
+}
+.top-features__thumb { display: none; }
+
+/* ===== カーソル追従の浮き出る画像カード ===== */
+.cursor-yokan {
+  position: fixed; top: 0; left: 0; width: 172px; height: 228px;
+  pointer-events: none; z-index: 50; opacity: 0; visibility: hidden;
+  transition: opacity .35s ease, visibility .35s ease; will-change: transform;
+}
+.cursor-yokan.is-visible { opacity: 1; visibility: visible; }
+.cursor-yokan__viewport {
+  position: relative; width: 100%; height: 100%; overflow: hidden; border-radius: 4px;
+  box-shadow: 0 14px 40px rgba(0,0,0,.22);
+}
+.cursor-yokan__pane { position: absolute; inset: 0; overflow: hidden; }
+.cursor-yokan__pane img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.cursor-yokan__pane--base { z-index: 1; }
+.cursor-yokan__pane--cover { z-index: 2; transform: translate3d(-100%, 0, 0); will-change: transform; }
+.cursor-yokan__pane--cover.is-wiping {
+  transition: transform .55s cubic-bezier(0.22, 1, 0.36, 1); transform: translate3d(0, 0, 0);
+}
+
+@media (max-width: 767px) {
+  .top-features { padding: 80px 0; }
+  .top-features__content { width: 88%; }
+  .top-features__label { font-size: 15px; margin-bottom: 12px; }
+  .top-features__heading { font-size: clamp(40px, 11vw, 72px); margin-bottom: 32px; }
+  .top-features__item {
+    grid-template-columns: auto 1fr; column-gap: 16px; padding: 40px 0 32px; cursor: auto;
+  }
+  .top-features__num { grid-column: 1; grid-row: 1; }
+  .top-features__title { grid-column: 2; grid-row: 1; font-size: 22px; }
+  .top-features__desc {
+    grid-column: 1 / -1; grid-row: 2; width: auto; max-width: none;
+    margin: 24px 0 0; font-size: 13px; pointer-events: auto;
+  }
+  .top-features__thumb {
+    display: block; grid-column: 1 / -1; grid-row: 3; margin-top: 28px;
+    overflow: hidden; aspect-ratio: 3 / 2;
+  }
+  .top-features__thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .cursor-yokan { display: none !important; }   /* SP は浮き出る演出なし */
+}

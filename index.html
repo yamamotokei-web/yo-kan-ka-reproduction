@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ja" class="top-intro-pending">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ヨウカンカ KV 再現</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="page-top">
+
+  <!-- 再現版であることを示すラベル -->
+  <span class="repro-badge">再現版</span>
+
+  <div class="top-kv">
+    <div class="top-kv__bg"></div>
+
+    <!-- ヒーローのコピー（イントロで1文字ずつ出現） -->
+    <div class="top-hero__copy">
+      <h1 class="top-hero__heading">
+        <span class="top-hero__heading-group" data-intro-pause-after="1000" data-intro-kv-show-blur="1"><span class="top-hero__heading-char">こ</span><span class="top-hero__heading-char">れ</span><span class="top-hero__heading-char">は</span><span class="top-hero__heading-char">、</span></span><span class="top-hero__heading-group" data-intro-pause-after="450"><span class="top-hero__heading-char">羊</span><span class="top-hero__heading-char">羹</span></span><span class="top-hero__heading-group" data-intro-kv-clear-blur="1" data-intro-char-duration-ms="650" data-intro-stagger-ms="220" data-intro-kv-blur-clear-duration-ms="700"><span class="top-hero__heading-char">か</span><span class="top-hero__heading-char top-hero__heading-char--mark">？</span></span>
+      </h1>
+      <p class="top-hero__wordmark" aria-hidden="true">
+        <img src="https://yokanka.com/wp-content/themes/yokanka/assets/images/logo.svg" alt="YO KAN KA">
+      </p>
+    </div>
+
+    <div class="top-kv__stage" data-kv-initial-idx="0">
+      <div class="top-kv__item" data-idx="0" data-name-a="苺" data-name-b="タルト" data-name-suffix="ヨウカンカ">
+        <img src="https://yokanka.com/wp-content/uploads/2026/04/Frame-25-3.jpg" alt="苺とタルトのヨウカンカ"></div>
+      <div class="top-kv__item" data-idx="1" data-name-a="カシス" data-name-b="マロングラッセ" data-name-suffix="ヨウカンカ">
+        <img src="https://yokanka.com/wp-content/uploads/2026/04/yokan_kv_1-2.jpg" alt="カシスとマロングラッセのヨウカンカ"></div>
+      <div class="top-kv__item" data-idx="2" data-name-a="ホワイトチョコレート" data-name-b="クッキー" data-name-suffix="ヨウカンカ">
+        <img src="https://yokanka.com/wp-content/uploads/2026/04/yokan_kv_5.jpg" alt="ホワイトチョコレートとクッキーのヨウカンカ"></div>
+      <div class="top-kv__item" data-idx="3" data-name-a="ラム酒" data-name-b="70% チョコレート" data-name-suffix="ヨウカンカ">
+        <img src="https://yokanka.com/wp-content/uploads/2026/04/yokan_kv_2-1.jpg" alt="ラム酒と70% チョコレートのヨウカンカ"></div>
+      <div class="top-kv__item" data-idx="4" data-name-a="リンゴ" data-name-b="キャラメル" data-name-suffix="ヨウカンカ">
+        <img src="https://yokanka.com/wp-content/uploads/2026/04/yokan_kv_3.jpg" alt="リンゴとキャラメルのヨウカンカ"></div>
+    </div>
+
+    <!-- 下部 info ボックス -->
+    <div class="top-kv__info">
+      <div class="top-kv__info-season" aria-hidden="true">
+        <div class="top-kv__info-season-dial top-kv__info-season-dial--from">
+          <div class="top-kv__info-season-dial-track"></div>
+        </div>
+        <span class="top-kv__info-season-track"><span class="top-kv__info-season-fill"></span></span>
+        <div class="top-kv__info-season-dial top-kv__info-season-dial--to">
+          <div class="top-kv__info-season-dial-track"></div>
+        </div>
+      </div>
+      <div class="top-kv__info-product">
+        <div class="top-kv__info-row">
+          <span class="top-kv__info-box"><span class="top-kv__info-box-text" data-key="a"></span></span>
+          <span class="top-kv__info-connector">と</span>
+        </div>
+        <div class="top-kv__info-row">
+          <span class="top-kv__info-box"><span class="top-kv__info-box-text" data-key="b"></span></span>
+          <span class="top-kv__info-connector">の</span>
+        </div>
+      </div>
+      <p class="top-kv__info-suffix">ヨウカンカ</p>
+    </div>
+  </div>
+
+  <!-- ============ Three Features（KV の下） ============ -->
+  <section class="top-features">
+    <div class="top-features__content">
+      <p class="top-features__label">ヨウカンカの3つの特徴</p>
+      <h2 class="top-features__heading">Three Features<br>of YO KAN KA</h2>
+      <hr class="top-features__rule" aria-hidden="true">
+
+      <div class="top-features__list">
+        <article class="top-features__item js-top-features-item"
+                 data-hover-src="https://yokanka.com/wp-content/themes/yokanka/assets/images/features_01.jpg">
+          <p class="top-features__num">( 01 )</p>
+          <h3 class="top-features__title">パティシエが<br>つくった羊羹</h3>
+          <p class="top-features__desc">YO KAN KA は、フランス菓子をベースに持つパティシエがあえて羊羹作りの技法を踏襲することなく、独自の解釈で作り上げた羊羹です。<br>餡子と寒天を使う、というルールに従いながら旬の食材を使ったり洋菓子の考え方を踏襲したりした新しい味わいが特徴です。</p>
+          <div class="top-features__thumb">
+            <img src="https://yokanka.com/wp-content/themes/yokanka/assets/images/features_01.jpg" alt="" loading="lazy" decoding="async">
+          </div>
+        </article>
+
+        <article class="top-features__item js-top-features-item"
+                 data-hover-src="https://yokanka.com/wp-content/themes/yokanka/assets/images/features_02.jpg">
+          <p class="top-features__num">( 02 )</p>
+          <h3 class="top-features__title">ペアリングも<br>楽しめるスイーツ</h3>
+          <p class="top-features__desc">お茶やコーヒーはもちろん、お酒とも相性抜群。<br>脂質が少ないので、夜に食べても罪悪感が少ない YO KAN KA はバーやナイトシーンでペアリングのデザートにぴったりです。</p>
+          <div class="top-features__thumb">
+            <img src="https://yokanka.com/wp-content/themes/yokanka/assets/images/features_02.jpg" alt="" loading="lazy" decoding="async">
+          </div>
+        </article>
+
+        <article class="top-features__item js-top-features-item"
+                 data-hover-src="https://yokanka.com/wp-content/themes/yokanka/assets/images/features_03.jpg">
+          <p class="top-features__num">( 03 )</p>
+          <h3 class="top-features__title">季節限定。<br>再現性はありません</h3>
+          <p class="top-features__desc">季節の YO KAN KA は、季節限定発売。再販しません。<br>一度きりの出会いをお楽しみに。<br>これまでのフレーバーは、コレクションページで紹介しています。</p>
+          <div class="top-features__thumb">
+            <img src="https://yokanka.com/wp-content/themes/yokanka/assets/images/features_03.jpg" alt="" loading="lazy" decoding="async">
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 本家と同じスタック：GSAP（イントロ/リビール）・Lenis（スムーススクロール） -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+
+  <!-- 自作スクリプト（KV/info/features/cursor/intro） -->
+  <script src="js/main.js"></script>
+</body>
+</html>
