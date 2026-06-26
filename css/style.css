@@ -39,9 +39,8 @@ html.lenis, html.lenis body { height: auto; }
 .top-kv__item img {
   display: block; width: 100%; aspect-ratio: 42 / 20;
   object-fit: cover;
-  /* JPG に焼き込まれた白背景を背景色になじませて長方形のフチを消す。
-     乗算合成：白×背景＝背景のまま → 白フチが見えなくなる（羊羹や影は残る） */
-  mix-blend-mode: multiply;
+  /* 画像（SVG）の背景は透過済みなので、白フチは出ない。
+     ぼかし中も背景色に依存せず、どんな背景色でもそのまま重ねられる。 */
 }
 @media (max-width: 767px) {
   .top-kv__item { width: 220px; }

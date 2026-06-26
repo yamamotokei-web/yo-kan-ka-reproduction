@@ -1,5 +1,4 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 400" role="img" aria-label="苺とピスタチオのこよみ">
-  <rect width="840" height="400" fill="#ffffff"/>
   <ellipse cx="420" cy="300" rx="320" ry="40" fill="#eee9df"/>
   <g transform="translate(420 220) rotate(-3)">
     <rect x="-260" y="-70" width="520" height="150" rx="22" fill="#cfe0a8"/>
