@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 640" role="img" aria-label="季節限定のイメージ">
+  <rect width="480" height="640" fill="#e7e2d6"/>
+  <rect x="60" y="60" width="360" height="520" rx="14" fill="#f4f1ea"/>
+  <circle cx="240" cy="240" r="80" fill="#f2c14e" opacity="0.9"/>
+  <g stroke="#b8472f" stroke-width="8" stroke-linecap="round" opacity="0.8">
+    <line x1="240" y1="120" x2="240" y2="150"/>
+    <line x1="240" y1="330" x2="240" y2="360"/>
+    <line x1="120" y1="240" x2="150" y2="240"/>
+    <line x1="330" y1="240" x2="360" y2="240"/>
+  </g>
+  <rect x="150" y="430" width="180" height="16" rx="8" fill="#1a1a1a" opacity="0.5"/>
+  <rect x="180" y="468" width="120" height="14" rx="7" fill="#1a1a1a" opacity="0.3"/>
+</svg>

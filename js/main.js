@@ -131,23 +131,23 @@ window.__lenis = null;
       back.style.opacity = '1';
       busy = false;
       layout(false);
-      window.dispatchEvent(new CustomEvent('yokankaKvSettled', { detail: { index: current } }));
+      window.dispatchEvent(new CustomEvent('yokanKvSettled', { detail: { index: current } }));
     }, 1300);
   };
 
-  window.addEventListener('yokankaKvAdvance', advance);
+  window.addEventListener('yokanKvAdvance', advance);
   layout(false);
 
   const introPending = document.documentElement.classList.contains('top-intro-pending');
   const settle = () =>
-    window.dispatchEvent(new CustomEvent('yokankaKvSettled', { detail: { index: current } }));
+    window.dispatchEvent(new CustomEvent('yokanKvSettled', { detail: { index: current } }));
 
   if (introPending) {
     // イントロ中は全カードを隠す（中央のみ intro 側がフェードインさせる）
     items.forEach((el) => { el.style.opacity = '0'; });
     // イントロのシーケンス開始イベントで KV を展開
-    window.addEventListener('yokankaKvSequenceStart', function onceStart() {
-      window.removeEventListener('yokankaKvSequenceStart', onceStart);
+    window.addEventListener('yokanKvSequenceStart', function onceStart() {
+      window.removeEventListener('yokanKvSequenceStart', onceStart);
       layout(false);                                   // 位置確定（中央は既に表示）
       items.forEach((el, i) => { if (i !== current) { el.style.transition = 'none'; el.style.opacity = '0'; } });
       requestAnimationFrame(() => requestAnimationFrame(() => {
@@ -176,8 +176,8 @@ window.__lenis = null;
   // --- タイミング定数（本家と同値） ---
   const KV_TYPE_CHAR_MS           = 92;   // 枠内を1文字ずつタイプする間隔
   const KV_TYPE_BOX_GAP_MS        = 420;  // 「と」跳ね終了〜2つ目の枠タイプ開始まで
-  const KV_SUFFIX_BOUNCE_DELAY_MS = 280;  // 「の」跳ね終了〜「ヨウカンカ」跳ね開始まで
-  const KV_SUFFIX_BOUNCE_GAP_MS   = 118;  // ヨウカンカの各文字の跳ね開始間隔（ダラララ感）
+  const KV_SUFFIX_BOUNCE_DELAY_MS = 280;  // 「の」跳ね終了〜「ようかん」跳ね開始まで
+  const KV_SUFFIX_BOUNCE_GAP_MS   = 118;  // ようかんの各文字の跳ね開始間隔（ダラララ感）
   const KV_SEASON_MS              = 4000; // 進行バーが満タンになる時間
 
   const stage = document.querySelector('.top-kv__stage');
@@ -266,9 +266,9 @@ window.__lenis = null;
     seasonFill.classList.add('is-running');
   };
 
-  /* ---------- suffix（ヨウカンカ）を1文字ずつ <span> 化 ---------- */
+  /* ---------- suffix（ようかん）を1文字ずつ <span> 化 ---------- */
   const ensureSuffixChars = (text) => {
-    const chars = [...(text || 'ヨウカンカ')];
+    const chars = [...(text || 'ようかん')];
     const ex = suffixEl.querySelectorAll('.top-kv__info-suffix-char');
     if (ex.length === chars.length) {
       const same = [...ex].every((el, i) => el.textContent === chars[i]);
@@ -283,7 +283,7 @@ window.__lenis = null;
       return s;
     });
   };
-  ensureSuffixChars('ヨウカンカ');
+  ensureSuffixChars('ようかん');
 
   const resetBounce = () => {
     if (suffixBounceTimer) { clearTimeout(suffixBounceTimer); suffixBounceTimer = null; }
@@ -307,9 +307,9 @@ window.__lenis = null;
     el.addEventListener('animationend', end);
   };
 
-  /* ---------- 跳ね（ヨウカンカを順番にパラパラ） ---------- */
+  /* ---------- 跳ね（ようかんを順番にパラパラ） ---------- */
   const bounceSuffix = (text) => {
-    const spans = ensureSuffixChars(text || 'ヨウカンカ');
+    const spans = ensureSuffixChars(text || 'ようかん');
     spans.forEach((c) => c.classList.remove('is-bounce-fast'));
     let idx = 0;
     const kick = () => {
@@ -379,10 +379,10 @@ window.__lenis = null;
             typeText(boxB, ds.nameB || '', () => {
               // ④ 「の」が跳ねる
               bounceEl(connectorNo, () => {
-                // ⑤ 「ヨウカンカ」が一文字ずつパラパラ跳ねる
+                // ⑤ 「ようかん」が一文字ずつパラパラ跳ねる
                 suffixBounceTimer = setTimeout(() => {
                   suffixBounceTimer = null;
-                  bounceSuffix(ds.nameSuffix || 'ヨウカンカ');
+                  bounceSuffix(ds.nameSuffix || 'ようかん');
                 }, KV_SUFFIX_BOUNCE_DELAY_MS);
               });
             });
@@ -404,7 +404,7 @@ window.__lenis = null;
   }
 
   /* ---------- KV が静止したら：文言を出し、バーを走らせる ---------- */
-  window.addEventListener('yokankaKvSettled', (ev) => {
+  window.addEventListener('yokanKvSettled', (ev) => {
     const idx = (typeof ev.detail?.index === 'number') ? ev.detail.index : 0;
     lastSettledKvIdx = idx;
     update(items[idx]);
@@ -423,7 +423,7 @@ window.__lenis = null;
     animateDial(dialFromTrack, dialPrevFrom, fromN, slideCount);
     animateDial(dialToTrack, dialPrevTo, toN, slideCount);
     dialPrevFrom = fromN; dialPrevTo = toN;
-    window.dispatchEvent(new CustomEvent('yokankaKvAdvance')); // → カルーセルが次へ
+    window.dispatchEvent(new CustomEvent('yokanKvAdvance')); // → カルーセルが次へ
   });
 })();
 
@@ -592,9 +592,9 @@ window.__lenis = null;
 
 
 /* =====================================================================
-   5) 初回ローディング（イントロ）— 本家 yokanka-top-intro.js を再現
+   5) 初回ローディング（イントロ）
       見出しを1文字ずつぼかしフェード → 中央の羊羹がぼけて出現しピント合致
-      → ロゴ「YO KA N KA」フェードイン → KV 展開＆カルーセル開始
+      → ロゴ「ようかん」フェードイン → KV 展開＆カルーセル開始
    ===================================================================== */
 (() => {
   'use strict';
@@ -611,7 +611,7 @@ window.__lenis = null;
     window.__lenis?.start();                              // スクロール再開
   };
   const startSequence = () => {
-    try { window.dispatchEvent(new CustomEvent('yokankaKvSequenceStart')); } catch {}
+    try { window.dispatchEvent(new CustomEvent('yokanKvSequenceStart')); } catch {}
   };
 
   // モーション抑制設定なら即解放
@@ -680,7 +680,7 @@ window.__lenis = null;
   const kvExpandAt = wordmark ? wordmarkStart + WORDMARK_FADE + WORDMARK_PAUSE : headingRevealAt + WORDMARK_PAUSE;
   if (kvClearAt == null) kvClearAt = kvExpandAt;
 
-  // ===== GSAP タイムラインでイントロを構築（本家 yokanka-top-intro.js と同じ構成）=====
+  // ===== GSAP タイムラインでイントロを構築 =====
   if (typeof gsap !== 'undefined') {
     // CSS のトランジションは使わず GSAP に任せる（二重アニメ防止）
     gsap.set(chars, { transition: 'none' });

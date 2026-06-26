@@ -168,7 +168,7 @@ html.top-intro-pending .top-kv__info { opacity: 0; }
 .top-kv__info-connector { display: inline-block; font-size: 23px; letter-spacing: .13em; color: #000; }
 .top-kv__info-connector.is-bounce { animation: top-kv-info-bounce .42s cubic-bezier(0.22, 1, 0.36, 1); }
 
-/* --- suffix（ヨウカンカ） --- */
+/* --- suffix（ようかん） --- */
 .top-kv__info-suffix {
   display: block; width: 100%; margin: 0; padding: 0 4px 0 0;
   font-size: 23px; letter-spacing: .13em; color: #000;

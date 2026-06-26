@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 400" role="img" aria-label="抹茶と黒豆のこよみ">
+  <rect width="840" height="400" fill="#ffffff"/>
+  <ellipse cx="420" cy="300" rx="320" ry="40" fill="#eee9df"/>
+  <g transform="translate(420 220) rotate(-3)">
+    <rect x="-260" y="-70" width="520" height="150" rx="22" fill="#8fae54"/>
+    <rect x="-260" y="-70" width="520" height="46" rx="22" fill="#3b3a42"/>
+    <rect x="-260" y="-40" width="520" height="16" fill="#3b3a42" opacity="0.35"/>
+    <circle cx="-150" cy="-46" r="12" fill="#ffffff" opacity="0.4"/>
+    <circle cx="120" cy="-44" r="9" fill="#ffffff" opacity="0.3"/>
+  </g>
+</svg>

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 640" role="img" aria-label="菓子職人のイメージ">
+  <rect width="480" height="640" fill="#e7e2d6"/>
+  <rect x="60" y="60" width="360" height="520" rx="14" fill="#f4f1ea"/>
+  <circle cx="240" cy="250" r="90" fill="#b8472f" opacity="0.85"/>
+  <rect x="150" y="360" width="180" height="22" rx="11" fill="#1a1a1a" opacity="0.55"/>
+  <rect x="180" y="400" width="120" height="16" rx="8" fill="#1a1a1a" opacity="0.3"/>
+  <path d="M200 250 q40 -55 80 0" fill="none" stroke="#f4f1ea" stroke-width="10" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 640" role="img" aria-label="ペアリングのイメージ">
+  <rect width="480" height="640" fill="#e7e2d6"/>
+  <rect x="60" y="60" width="360" height="520" rx="14" fill="#f4f1ea"/>
+  <path d="M150 200 h60 v110 a30 30 0 0 1 -60 0 z" fill="#b8472f" opacity="0.8"/>
+  <rect x="176" y="340" width="8" height="90" fill="#1a1a1a" opacity="0.45"/>
+  <rect x="150" y="430" width="60" height="12" rx="6" fill="#1a1a1a" opacity="0.45"/>
+  <rect x="270" y="300" width="80" height="130" rx="14" fill="#8fae54" opacity="0.85"/>
+  <rect x="270" y="300" width="80" height="34" rx="14" fill="#e85a7a" opacity="0.85"/>
+</svg>
